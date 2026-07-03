@@ -1,10 +1,10 @@
-<p align="center"><img alt="ProBook 4x40s" src="Resources/probook-4540s-banner.png"/></p>
+<p align="center"><img alt="ProBook 4x40s" src="Images/probook-4540s-banner.png"/></p>
 <h1 align="center">ProBook 4x40s OpenCore</h1>
 <h3 align="center">4340s / 4540s / 4740s</h3>
 
 Detailed instructions on how to install recent version of [macOS](https://en.wikipedia.org/wiki/MacOS) on HP ProBook 40s series laptops with third generation Ivy Bridge Intel Core i CPUs, – specifically, a [ProBook 4540s](https://support.hp.com/us-en/product/product-specs/model/5229457).
 
-![macOS Installed on a ProBook 4540s](Resources/about-this-probook.png)
+![macOS Installed on a ProBook 4540s](Images/about-this-probook.png)
 
 > [!IMPORTANT]
 > A previous [guide for 30s series laptops](https://github.com/ubihazard/probook-4x30s-oc "macOS for ProBook 4x30s") with second generation Intel Sandy Bridge CPUs and non-metal graphics is still available for reference. Some content is kept there to avoid duplication.
