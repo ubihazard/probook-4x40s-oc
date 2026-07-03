@@ -93,7 +93,7 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 
 0.  Choose macOS version you would like to install. Monterey is recommended for a good combination of up-to-date software support and stable performance. Stick to Big Sur if you would like to avoid root patches. It is modern enough and has decent software support. Ventura and later require AVX2 emulation via [CryptexFixup](https://github.com/acidanthera/CryptexFixup) while Sequoia is the latest version you can install.
 
-1.  [Make a bootable macOS USB installer](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/) according to Dortania guide.
+1.  Make a [bootable macOS USB installer](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/) according to Dortania guide.
 
 2.  Mount EFI partition on a USB installer and copy OpenCore files downloaded from [releases page](https://github.com/ubihazard/probook-4x40s-oc/releases/latest "Download"). Replace `config.plist` with `config-usb.plist` to keep the configuration variant modified specifically for use with macOS installer.
 
@@ -141,13 +141,13 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
     
       * For Monterey or later make sure `ASPP-Override.kext` is enabled too. It is required to restore legacy CPU power management which was at some point removed in Monterey.
 
-8.  The USB port map kext from the provided EFI folder should work for all ProBook 4540s models. If you’d like to make your own, use [USBMap](https://github.com/corpnewt/USBMap) now while still booted from USB to re-map USB ports and make your own `USBMap.kext`. This procedure is fully covered in Dortania [guide](https://dortania.github.io/OpenCore-Post-Install/usb/ "USB port mapping guide") and I won‘t be duplicating it here.
+8.  The USB port map kext from the provided EFI folder should work for all ProBook 4540s models. If you’d like to make your own, use [USBMap](https://github.com/corpnewt/USBMap) now while still booted from USB to re-map ports and make your own `USBMap.kext`. This procedure is fully covered in Dortania [guide](https://dortania.github.io/OpenCore-Post-Install/usb/ "USB port mapping guide") and I won‘t be duplicating it here.
 
 9.  For laptops with additional discrete GPU it needs to be disabled. There are two ways you can go about this.
 
-      * The Radeon GPU used in such old ProBooks is not very useful. It lacks up-to-date drivers from AMD and doesn’t actually perform much faster than integrated Intel HD 4000 graphics in modern games. Not to mention it also consumes extra power and generates more heat. Because of this you might want to simply disable it in BIOS. This is recommended option.
+      * The Radeon GPU used in such old ProBooks is not very useful. It lacks up-to-date drivers from AMD and doesn’t actually perform much faster than integrated Intel HD 4000 graphics in modern games. Not to mention it also consumes extra power and generates more heat. Because of this you might want to simply disable it in BIOS. This is the recommended approach.
 
-      * If you want to keep your Radeon GPU available a [patch](#disabling-radeon) must be applied to disable it in macOS.
+      * If you want to keep your Radeon GPU available, a [patch](#disabling-radeon) must be applied to disable it in macOS.
 
         1.  Toggle “Switchable Graphics” in BIOS.
         2.  Enable `SSDT-dGPU-OFF.aml` and `SSDT-dGPU-OFF2.aml` ACPI tables in `ACPI/Add`.
@@ -172,7 +172,6 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     <data>AwgAAA==</data>
     ```
 
-    > [!NOTE]
     > We don’t explicitly disable AMFI via `amfi=0x80` boot arg because it is handled by `AMFIPass.kext` in updated configuration instead.
 
 3.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches.
@@ -221,8 +220,8 @@ Such [disable patch](ACPI/SSDT-dGPU-OFF.dsl) has already been made by me for my 
 ### 0. What You Need
 
   * Live Linux USB distro.
-  * Semi-decent plain text editor ([Cot]() would suffice).
-  * Binary hex editor ([HexEdit]() is okay).
+  * Semi-decent plain text editor ([Cot](https://coteditor.com/) would suffice).
+  * Binary hex editor ([HexFiend](https://hexfiend.com/) is okay).
   * Basic knowledge of programming.
   * Some brains.
 
@@ -511,7 +510,7 @@ Other rename patches are created in a same way.
 Open `config.plist` and append entries for compiled SSDT tables under `ACPI/Add` section:
 
 <details>
-<summary><strong>Example</strong></summary><br>
+<summary><strong>Complete SSDT section</strong></summary><br>
 
 ```xml
 <dict>
@@ -536,7 +535,7 @@ Open `config.plist` and append entries for compiled SSDT tables under `ACPI/Add`
 Patches with original method renames belong to `ACPI/Patch`:
 
 <details>
-<summary><strong>Example</strong></summary><br>
+<summary><strong>Complete rename section</strong></summary><br>
 
 ```xml
 <dict>
