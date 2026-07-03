@@ -154,7 +154,7 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 
       * If you want to keep your Radeon GPU available, a [patch](#disabling-radeon) must be applied to disable it in macOS.
 
-        1.  Toggle “Switchable Graphics” in BIOS.
+        1.  Turn on “Switchable Graphics” in BIOS.
         2.  Enable `SSDT-dGPU-OFF.aml` and `SSDT-dGPU-OFF2.aml` ACPI tables in `ACPI/Add`.
         3.  Activate the following patches in `ACPI/Patch`:
               * `GFX0 Method(PX02,1,S) to ZX02`
