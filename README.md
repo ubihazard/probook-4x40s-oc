@@ -81,9 +81,9 @@ Kernel Extensions
   * `FeatureUnlock.kext` [1.1.8]: Enable Sidecar, AirPlay, etc.
   * `IOSkywalkFamily.kext`: Restore legacy Broadcom wireless
       * `IO80211FamilyLegacy.kext`
-  * `AppleIntelCPUPowerManagement.kext`: SNB & IVB CPU PM
+  * `AppleIntelCPUPowerManagement.kext`: Restore legacy CPU PM
       * `AppleIntelCPUPowerManagementClient.kext`
-  * `ASPP-Override.kext`: Legacy power management
+  * `ASPP-Override.kext`: Force legacy CPU power management
   * `ACPIPoller.kext`: Laptop fan control
   * `AdvancedMap.kext`: Apple Maps fix
   * `NoTouchID.kext`: Disable Touch ID
