@@ -177,7 +177,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     <data>AwgAAA==</data>
     ```
 
-    > We don’t explicitly disable AMFI via `amfi=0x80` boot arg because it is handled by `AMFIPass.kext` in updated configuration instead.
+    > We don’t explicitly disable AMFI via `amfi=0x80` boot arg because it is handled by `AMFIPass.kext` in updated configuration instead. `amfi=0x80` is still used in a USB config though.
 
 3.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches.
 
