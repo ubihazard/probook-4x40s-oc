@@ -78,6 +78,11 @@ Kernel Extensions
       * `BrcmPatchRAM2.kext`
   * `JMB38X.kext` [1.5.0]: SD card reader
       * `HSSDBlockStorage.kext`
+  * `FeatureUnlock.kext` [1.1.8]: Enable Sidecar, AirPlay, etc.
+  * `IOSkywalkFamily.kext`: Restore legacy Broadcom wireless
+      * `IO80211FamilyLegacy.kext`
+  * `AppleIntelCPUPowerManagement.kext`: SNB & IVB CPU PM
+      * `AppleIntelCPUPowerManagementClient.kext`
   * `ASPP-Override.kext`: Legacy power management
   * `ACPIPoller.kext`: Laptop fan control
   * `AdvancedMap.kext`: Apple Maps fix
@@ -690,6 +695,77 @@ Patches with original method renames belong to `ACPI/Patch`:
 </dict>
 ```
 </details>
+
+Keeping BD PROCHOT Away
+-----------------------
+
+Trying to use a MacBook without a working battery would result in an extremely slow and unresponsive system because MacBook firmware actively prevents using a laptop without one by means of throttling, causing MacBook CPU to run at its lowest clock speed. This shouldn’t affect hackintosh laptops because they don’t have a Mac firmware (although they might exhibit similar behavior due to firmware tricks of their own). However, it *does* affect Intel iGPU graphics performance, which manifests in unusually slow 3D in certain applications, like browsers, or weird graphical issues, such as missing textures or models.
+
+Having no OEM batteries available for our ProBook we have to fix this issue by forcibly disabling BD PROCHOT, a special CPU flag which mainboard firmware uses to cause throttling.
+
+Enable the `DisablePROCHOT.efi` bootloader driver:
+
+<details>
+<summary><strong>Example</strong></summary><br>
+
+```xml
+<dict>
+    <key>Arguments</key>
+    <string></string>
+    <key>Comment</key>
+    <string>DisablePROCHOT.efi</string>
+    <key>Enabled</key>
+    <true/>
+    <key>LoadEarly</key>
+    <false/>
+    <key>Path</key>
+    <string>DisablePROCHOT.efi</string>
+</dict>
+```
+</details>
+
+Enable the `SimpleMSR.kext` which will continue to keep BD PROCHOT off after startup, so it doesn’t return e.g. after sleep:
+
+<details>
+<summary><strong>Example</strong></summary><br>
+
+```xml
+<dict>
+    <key>Arch</key>
+    <string>Any</string>
+    <key>BundlePath</key>
+    <string>SimpleMSR.kext</string>
+    <key>Comment</key>
+    <string>SimpleMSR.kext</string>
+    <key>Enabled</key>
+    <true/>
+    <key>ExecutablePath</key>
+    <string>Contents/MacOS/SimpleMSR</string>
+    <key>MaxKernel</key>
+    <string></string>
+    <key>MinKernel</key>
+    <string></string>
+    <key>PlistPath</key>
+    <string>Contents/Info.plist</string>
+</dict>
+```
+</details>
+
+ProBook 40s Series 16 GB RAM Issue
+----------------------------------
+
+ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h30434.www3.hp.com/t5/Notebook-Hardware-and-Upgrade-Questions/Performance-degrades-in-Probook-4540s-after-memory-upgrade/td-p/2268503) whereby installing 16 GB of RAM causes laptop to slow down to a crawl with a permanent near 100% CPU usage at idle. The cause of this behavior was never explained or addressed by HP, but, luckily, the solution was discovered and it is as simple as deducing 256 MB of RAM from memory pool availably to the system.
+
+  * In macOS add the boot arg to extract 256 MB of RAM:
+
+```xml
+<key>boot-args</key>
+<string>... maxmem=16128</string>
+```
+
+  * Use the <kbd>Win+R</kbd> `msconfig` system tool on Windows and set available RAM to `16128`. Boot with a single 8 GB stick if you can’t reach desktop.
+
+  * Add `mem=17G` kernel parameter if using Linux-based OS.
 
 ACPI Patching
 -------------
