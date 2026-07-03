@@ -544,36 +544,6 @@ Patches with original method renames belong to `ACPI/Patch`:
     <key>BaseSkip</key>
     <integer>0</integer>
     <key>Comment</key>
-    <string>EC Method(_REG,2,N) to XREG</string>
-    <key>Count</key>
-    <integer>0</integer>
-    <key>Enabled</key>
-    <true/>
-    <key>Find</key>
-    <data>X1JFRwKgKJNoCgM=</data>
-    <key>Limit</key>
-    <integer>0</integer>
-    <key>Mask</key>
-    <data></data>
-    <key>OemTableId</key>
-    <data></data>
-    <key>Replace</key>
-    <data>WFJFRwKgKJNoCgM=</data>
-    <key>ReplaceMask</key>
-    <data></data>
-    <key>Skip</key>
-    <integer>0</integer>
-    <key>TableLength</key>
-    <integer>0</integer>
-    <key>TableSignature</key>
-    <data></data>
-</dict>
-<dict>
-    <key>Base</key>
-    <string></string>
-    <key>BaseSkip</key>
-    <integer>0</integer>
-    <key>Comment</key>
     <string>GFX0 Method(PX02,1,S) to ZX02</string>
     <key>Count</key>
     <integer>0</integer>
@@ -619,6 +589,36 @@ Patches with original method renames belong to `ACPI/Patch`:
     <data></data>
     <key>Replace</key>
     <data>FCBaSU5J</data>
+    <key>ReplaceMask</key>
+    <data></data>
+    <key>Skip</key>
+    <integer>0</integer>
+    <key>TableLength</key>
+    <integer>0</integer>
+    <key>TableSignature</key>
+    <data></data>
+</dict>
+<dict>
+    <key>Base</key>
+    <string></string>
+    <key>BaseSkip</key>
+    <integer>0</integer>
+    <key>Comment</key>
+    <string>EC Method(_REG,2,N) to XREG</string>
+    <key>Count</key>
+    <integer>0</integer>
+    <key>Enabled</key>
+    <true/>
+    <key>Find</key>
+    <data>X1JFRwKgKJNoCgM=</data>
+    <key>Limit</key>
+    <integer>0</integer>
+    <key>Mask</key>
+    <data></data>
+    <key>OemTableId</key>
+    <data></data>
+    <key>Replace</key>
+    <data>WFJFRwKgKJNoCgM=</data>
     <key>ReplaceMask</key>
     <data></data>
     <key>Skip</key>
