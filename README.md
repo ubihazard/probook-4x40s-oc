@@ -30,8 +30,8 @@ We will be working with the following configuration[^1]:
 | **Wireless** | Broadcom BCM94352HMB
 | **Ethernet** | Realtek RTL8111
 | **USB 3.0**  | ASMedia
-| **Card reader** | JMicron JMB38X
-| **Optical drive** | HP DVD-RAM GT80N
+| **Card Reader** | JMicron JMB38X
+| **Optical Drive** | HP DVD-RAM GT80N
 | **macOS**    | Sequoia 15.7.7
 | **OpenCore** | [1.0.6-0cc8c81](https://github.com/ubihazard/OpenCorePkg-ProBook-Legacy/releases/tag/v1.0.6-0cc8c81) for legacy ProBook
 | **OCLP** | [2.4.1](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.4.1)
