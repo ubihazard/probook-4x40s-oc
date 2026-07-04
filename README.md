@@ -724,7 +724,7 @@ Enable the `DisablePROCHOT.efi` bootloader driver:
 ```
 </details>
 
-Enable the `SimpleMSR.kext` which will continue to keep BD PROCHOT off after startup, so it doesn’t return e.g. after sleep:
+Enable the `SimpleMSR.kext` which will continue to keep BD PROCHOT disabled after startup, so it doesn’t return e.g. after sleep:
 
 <details>
 <summary><strong>Example</strong></summary><br>
