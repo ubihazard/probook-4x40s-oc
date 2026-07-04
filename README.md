@@ -216,9 +216,9 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 Disabling Radeon
 ----------------
 
-Many laptops come in a dual-GPU setup where iGPU is combined with a more powerful discrete graphics card and some switching mechanism is employed to toggle between them depending on current graphical demands, – ProBooks aren‘t exception. Both Sandy Bridge and Ivy Bridge ProBooks had configurations with discrete AMD Radeon GPUs. These GPUs have no support in macOS and must be disabled to avoid boot issues and achieve a properly working system.
+Many laptops come in a dual-GPU setup where iGPU is combined with a more powerful discrete graphics card and some switching mechanism is employed to toggle between them depending on current graphical demands, – ProBooks aren‘t an exception. Both Sandy Bridge and Ivy Bridge ProBooks had configurations with discrete AMD Radeon GPUs. These GPUs have no support in macOS and must be disabled to avoid boot issues and achieve a properly working system.
 
-The most obvious and easy way to do this is simply disabling discrete GPU in BIOS. If you have no use of it in any other operating system, this is the preferred solution. If, however, you insist on having it available in, let’s say, Windows, for some old games maybe, or you’re just being pedantic, a more fine-grained approach in a form of ACPI patch is required to disable Radeon GPU exclusively in macOS.
+The most obvious and easy way to do so is simply disabling discrete GPU in BIOS. If you have no use of it in any other operating system, this is the preferred solution. If, however, you insist on having it available in, let’s say, Windows, for some old games maybe, or you’re just being pedantic, a more fine-grained approach in a form of ACPI patch is required to disable Radeon GPU exclusively in macOS.
 
 Such [disable patch](ACPI/SSDT-dGPU-OFF.dsl) has already been made by me for my ProBook 4540s (it‘s a [two-step](ACPI/SSDT-dGPU-OFF2.dsl) patch actually). Here I attempt to explain how this patch was created in case if you want to make similar patch for a different laptop or if you’re simply interested. This approach is valid for most laptops released in early 2010s using simple switchable graphics. For modern laptops and those using NVIDIA Optimus technology refer to [Dortania dGPU disable guide](https://dortania.github.io/Getting-Started-With-ACPI/Laptops/laptop-disable.html).
 
@@ -230,9 +230,9 @@ Such [disable patch](ACPI/SSDT-dGPU-OFF.dsl) has already been made by me for my 
   * Basic knowledge of programming.
   * Some brains.
 
-### 1. Extracting ACPI Table
+### 1. Extracting ACPI Tables
 
-Using a live Linux USB boot it up and extract ACPI tables:
+Using a live Linux USB, boot it up and extract ACPI tables:
 
 ```bash
 sudo acpidump > acpi_tables.txt
@@ -288,7 +288,7 @@ The general approach to ACPI patching is:
 
   * Rename the method that you want to change.
   * Create a new method with a modified code. It can reference other stuff in DSDT and potentially call the original renamed method if needed.
-  * Repeat for other methods you want to patch.
+  * Repeat for other methods you wish to patch.
   * Place all new code in a separate SSDT table and inject it into ACPI using OpenCore during boot process.
 
 ### 4. dGPU Disable Patch, Pt. 1
@@ -323,7 +323,7 @@ Method (PX02, 1, Serialized)
 }
 ```
 
-Notice we are calling the original (soon to be renamed) `ZX02` method, but we are feeding it with a constant zero argument, which causes it to take the `_OFF` code path all the time, and simply ignore whatever argument comes to us.
+Notice we are calling the original (soon to be renamed) `ZX02` method, but we are feeding it with a constant zero argument, which causes it to take the `_OFF` code path all the time, unconditionally, and simply ignore whatever argument comes to us.
 
 Now let’s take a look at the `_INI` method:
 
@@ -350,7 +350,7 @@ The complete first patch organized into SSDT table can be found [here](ACPI/SSDT
 
 ### 5. dGPU Disable Patch, Pt. 2
 
-This could be it, but unfortunately things aren’t as simple. Although the above patch will work for turning dGPU at boot, laptop firmware changes dGPU state when laptop goes to sleep (off) and wakes up (on). Therefore we need to make a patch that will turn dGPU back on right before machine goes to sleep (because firmware expects it to be on) and turn it off again after laptop wakes up, negating the firmware behavior.
+This could be it, but unfortunately things aren’t as simple. Although the above patch will work for turning off dGPU at boot, laptop firmware still changes dGPU state when laptop goes to sleep (off) and wakes up (on). Therefore we need to make a patch that will turn dGPU back on right before machine goes to sleep (because firmware expects it to be on) and turn it off again after laptop wakes up, negating the firmware behavior.
 
 Opening up main `dsdt.dsl` ACPI table we are looking for `_PTS` (“prepare to sleep”) and `_WAK` (“wake”) methods:
 
@@ -368,7 +368,7 @@ Method (_WAK, 1, NotSerialized)  // _WAK: Wake
 }
 ```
 
-Using an approach like before we “rename” the original methods and create our patched replacements (actual renaming will happen later):
+Using the familiar approach we “rename” the original methods and create our patched replacements (actual renaming will happen later):
 
 ```aml
 // Original _PTS is renamed to ZPTS
@@ -457,9 +457,9 @@ The above commands will produce two binary files: `SSDT-dGPU-OFF.aml` and `SSDT-
 
 It was mentioned earlier several times that we need to rename original methods in order to replace them with our patched ones. So far we were looking at plain text code where these methods are used as if they were already renamed. But to actually rename them we have to create binary ACPI patches because obviously these methods don’t exist in plain text form. We will use OpenCore ACPI patching mechanisms to accomplish this.
 
-Open original binary files of ACPI tables we were working on (`dsdt.aml` and `ssdt3.aml`) in a hex editor. Let’s say we want to create a binary rename patch for the `_REG` method inside `EC0`. Looking at `dsdt.aml` opened in a hex editor search for `_REG` ASCII string. There are many `_REG` methods in `dsdt.aml` that belong to various devices in search results but the one we are interested in is located at offset `0x6F08`: we can easily discern that by looking at surrounding binary code which shows many familiar identifiers (`PRIT`, `ECRG`, `WCOS`, etc.) that we saw in a source code of the `_REG` method we’ve been working on.
+Open the original binary files of ACPI tables we were working on (`dsdt.aml` and `ssdt3.aml`) in a hex editor. Let’s say we want to create a binary rename patch for the `_REG` method inside `EC0`. Looking at `dsdt.aml` opened in a hex editor search for `_REG` ASCII string. There are many `_REG` methods in `dsdt.aml` that belong to various devices in search results but the one we are interested in is located at offset `0x6F08`: we can easily discern that by looking at surrounding binary code which shows many familiar identifiers (`PRIT`, `ECRG`, `WCOS`, etc.) that we saw in a source code of the `_REG` method we’ve been working on.
 
-Select ten bytes in a binary view starting at offset `0x6F08`, which gives us `5F52454702A02893680A03`. This will be our search pattern for the binary rename patch. This patch must be unique across entire ACPI code, otherwise we risk renaming something completely different in unknown location with potentially bad consequences, – hence us selecting more bytes and not just four. The original `_REG` ASCII string must be transformed to `XREG` in our patch so we modify the original pattern to derive our replacement from it: `5852454702A02893680A03`. Here we changed just one byte, `5F` to `58`, which is ASCII hexadecimal code for `X`.
+Select ten bytes in a binary view starting at offset `0x6F08`, which gives us `5F52454702A02893680A03`. This will be our search pattern for the binary rename patch. This patch must be unique across entire ACPI code, otherwise we risk renaming something completely different in unknown location with potentially bad consequences, – hence us selecting more bytes and not just four. The original `_REG` ASCII string must be transformed into `XREG` in our patch so we modify the original pattern to derive our replacement from it: `5852454702A02893680A03`. Here we changed just one byte, `5F` to `58`, which is ASCII hexadecimal code for `X`.
 
 To finalize our patch we must convert it to OpenCore configuration format which accepts binary values in Base64 encoding. Using the following commands we convert our hexadecimal patterns to Base64:
 
@@ -473,7 +473,7 @@ To finalize our patch we must convert it to OpenCore configuration format which 
 > WFJFRwKgKJNoCgM=
 ```
 
-First we convert them to actual binary (that can’t be printed to terminal) and then encode them with a Base64 encoding tool. The resulting OpenCore ACPI patch will look like:
+First we convert them to actual binary (that can’t be printed to terminal) and then encode them with a Base64 encoding tool. The resulting OpenCore ACPI patch will look like this:
 
 ```xml
 <dict>
