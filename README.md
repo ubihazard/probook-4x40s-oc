@@ -17,7 +17,7 @@ Despite effort was made to make all steps as easy to follow and clear as possibl
 Introduction
 ------------
 
-Why ProBook 4540s? It’s a relatively modern-looking laptop from early 2010s that you can find for a pocket change on your local used market. The tough bastard has a stylish metal frame and a great scissor-switch keyboard. Together with older ProBook 4530s and EliteBook 8570p they resemble Apple’s famous (or infamous) titanium PowerBook G4 and its later aluminum version. With a handful of aftermarket upgrades it can still make a powerful machine for simple daily tasks. More importantly, even in stock condition it is fairly compatible with macOS.
+Why ProBook 4540s? It’s a relatively modern-looking laptop from early 2010s that you can find for a pocket change on your local used market. The tough bastard has a stylish metal frame and a great scissor-switch keyboard. Together with older ProBook 4530s and EliteBook 8570p they resemble Apple’s famous (or infamous) [titanium PowerBook G4](https://en.wikipedia.org/wiki/PowerBook_G4#Titanium_(2001-2003)) and its later aluminum incarnation. With a handful of aftermarket upgrades it can still make a powerful machine for simple daily tasks. More importantly, even in stock condition it is fairly compatible with macOS.
 
 We will be working with the following configuration[^1]:
 
@@ -121,7 +121,7 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 
 6.  Copy OpenCore files to your system EFI partition so you can boot without USB. This time keep the `config.plist` from [EFI folder](https://github.com/ubihazard/probook-4x40s-oc/releases/latest "Download"), not `config-usb.plist`.
 
-7.  Connect ethernet cable to your laptop. The next step requires working internet connection to download Intel CPU PM ACPI tables so we can restore power management. Without proper CPU PM `AppleIntelCPUPowerManagement.kext` would cause kernel panic at boot so `NullCPUPowerManagement.kext` is used (in USB `config.plist`) to overtake control from it temporarily.
+7.  Connect ethernet cable to your laptop. The next step requires working internet connection to download Intel CPU PM ACPI tables so we can restore power management for the exact processor used in your ProBook. Without proper CPU PM `AppleIntelCPUPowerManagement.kext` would cause kernel panic at boot so `NullCPUPowerManagement.kext` is used (in USB `config.plist`) to temporarily overtake control from it.
 
       * Follow the Dortania [guide](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#sandy-and-ivy-bridge-power-management) to create `SSDT-PM.aml` table for the CPU installed in your laptop.
     
@@ -146,11 +146,11 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
     
       * For Monterey or later make sure `ASPP-Override.kext` is enabled too. It is required to restore legacy CPU power management which was at some point removed in Monterey.
 
-8.  The USB port map kext from the provided EFI folder should work for all ProBook 4540s models. If you’d like to make your own, use [USBMap](https://github.com/corpnewt/USBMap) now while still booted from USB to re-map ports and make your own `USBMap.kext`. This procedure is fully covered in Dortania [guide](https://dortania.github.io/OpenCore-Post-Install/usb/ "USB port mapping guide") and I won‘t be duplicating it here.
+8.  The USB port map kext from the provided EFI folder should work for all ProBook 4540s models. If you’d like to make your own, use [USBMap](https://github.com/corpnewt/USBMap) while still booted from the USB to re-map ports and make your own `USBMap.kext`. This procedure is fully covered in Dortania [guide](https://dortania.github.io/OpenCore-Post-Install/usb/ "USB port mapping guide") and I won‘t be duplicating it here.
 
 9.  For laptops with additional discrete GPU it needs to be disabled. There are two ways you can go about this.
 
-      * The Radeon GPU used in such old ProBooks is not very useful. It lacks up-to-date drivers from AMD and doesn’t actually perform much faster than integrated Intel HD 4000 graphics in modern games. Not to mention it also consumes extra power and generates more heat. Because of this you might want to simply disable it in BIOS. This is the recommended approach.
+      * The Radeon GPU installed in such old ProBooks is not very useful. It lacks up-to-date drivers from AMD and doesn’t actually perform much faster than integrated Intel HD 4000 graphics in modern games. Not to mention it also consumes extra power and generates more heat. Because of this you might want to simply disable it in BIOS. This is the recommended approach.
 
       * If you want to keep your Radeon GPU available, a [patch](#disabling-radeon) must be applied to disable it in macOS.
 
@@ -166,9 +166,9 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 Post-install
 ------------
 
-We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Post-installation guide") to make the system usable. Unless you decided to install Big Sur or earlier, you’d be stuck without hardware graphics acceleration and, as a result, very slow and unusable user interface. This and other things, like Wi-Fi and Bluetooth, is fixed here.
+We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Post-installation guide") to make the system fully usable. Unless you decided to install Big Sur or earlier, you’d be stuck without hardware graphics acceleration and, as a result, very slow and unusable user interface. This and other things, like Wi-Fi and Bluetooth, is fixed here.
 
-1.  Set the values of `MinVersion` and `MinDate` in `UEFI/APFS` [according](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html#apfs) to macOS version you have installed. For Big Sur and above, just leave both at `0`.
+1.  Set the values of `MinVersion` and `MinDate` in `UEFI/APFS` [according](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html#apfs) to macOS version you have installed. For Big Sur and above just leave both at `0`.
 
 2.  Disable SIP in `NVRAM/Add/7C436110-AB2A-4BBB-A880-FE41995C9F82` (the configured value is `0x803`):
 
@@ -187,7 +187,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
 6.  Choose your preferred Fn key [behavior](https://github.com/ubihazard/probook-4x30s-oc#function-keys).
 
-7.  Set the appropriate SMBIOS for your laptop: `MacBookPro9,1` if you’ve got quad-core CPU installed in your ProBook, `MacBookPro9,2` for dual-core configurations. If you need to change from the stock `MacBookPro9,1` name set in the [provided](EFI/OC/config.plist#L2375) `config.plist` make sure to also [adjust](https://github.com/ubihazard/probook-4x30s-oc#usb-port-mapping-in-smbios) both USB map kexts. Now you can use `macserial` tool from OpenCore utilities to generate serials:
+7.  Set the appropriate SMBIOS for your laptop: `MacBookPro9,1` if you’ve got quad-core CPU installed in your ProBook, `MacBookPro9,2` for dual-core configurations. If you need to change from the stock `MacBookPro9,1` name set in the [provided](EFI/OC/config.plist#L2501) `config.plist` make sure to also [adjust](https://github.com/ubihazard/probook-4x30s-oc#usb-port-mapping-in-smbios) both USB map kexts (there’s an additional `USBMap.kext` in `Legacy` subfolder). Now you can use `macserial` tool from OpenCore utilities to generate serials:
     
     ```bash
     ./macserial -m 'MacBookPro9,1' -n 1
