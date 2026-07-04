@@ -751,10 +751,10 @@ Enable the `SimpleMSR.kext` which will continue to keep BD PROCHOT off after sta
 ```
 </details>
 
-ProBook 40s Series 16 GB RAM Issue
-----------------------------------
+ProBook 40s 16 GB RAM Issue
+---------------------------
 
-ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h30434.www3.hp.com/t5/Notebook-Hardware-and-Upgrade-Questions/Performance-degrades-in-Probook-4540s-after-memory-upgrade/td-p/2268503) whereby installing 16 GB of RAM causes laptop to slow down to a crawl with a permanent near 100% CPU usage at idle. The cause of this behavior was never explained or addressed by HP, but, luckily, the solution was discovered and it is as simple as deducing 256 MB of RAM from memory pool availably to the system.
+ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h30434.www3.hp.com/t5/Notebook-Hardware-and-Upgrade-Questions/Performance-degrades-in-Probook-4540s-after-memory-upgrade/td-p/2268503) whereby installing 16 GB of RAM causes laptop to slow down to a crawl with a permanent near 100% CPU usage at idle. The cause of this behavior was never explained or addressed by HP, but, luckily, the solution was discovered and it is as simple as deducing 256 MB of RAM from memory pool available to the system.
 
   * In macOS add the boot arg to extract 256 MB of RAM:
 
@@ -763,7 +763,7 @@ ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h3
 <string>... maxmem=16128</string>
 ```
 
-  * Use the <kbd>Win+R</kbd> `msconfig` system tool on Windows and set available RAM to `16128`. Boot with a single 8 GB stick if you can’t reach desktop.
+  * Use the `msconfig` system tool on Windows and set available RAM to `16128`. Boot with a single 8 GB stick first if you can’t reach desktop.
 
   * Add `mem=17G` kernel parameter if using Linux-based OS.
 
