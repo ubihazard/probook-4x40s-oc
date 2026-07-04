@@ -777,9 +777,9 @@ ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h3
 
     > Actually, the issue is *least* prominent on macOS, having a mild effect maybe only on the startup process, while Windows 11 is rendered literally unbootable.
 
-  * Use the `msconfig` system tool on Windows and set available RAM to `16128`. Boot with a single 8 GB stick first if you can’t reach desktop.
+  * Use the `msconfig` system tool on Windows and set available RAM to `16128`. Boot with a single 8 GB stick first if you can’t reach the desktop.
 
-  * Add `mem=17G` kernel parameter if using Linux-based OS.
+  * Add `mem=17G` kernel parameter if using a Linux-based OS.
 
 ACPI Patching
 -------------
