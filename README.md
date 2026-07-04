@@ -59,9 +59,8 @@ Kernel Extensions
       * `SMCSuperIO.kext`: EC support
       * `SMCBatteryManager.kext`: Laptop battery
       * `SMCLightSensor.kext`: Laptop lid light sensor
-  * `VoodooPS2Controller.kext` [2.3.7]: PS/2 input support
+  * `VoodooPS2Controller.kext` [1.9.2]: PS/2 input support
       * `VoodooPS2Keyboard.kext`
-      * `VoodooPS2Mouse.kext`
       * `VoodooPS2Trackpad.kext`
   * `RealtekRTL8111.kext` [3.0.0]: Wired ethernet
   * `AppleALC.kext` [1.9.7]: Audio patches
