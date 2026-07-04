@@ -701,7 +701,7 @@ Keeping BD PROCHOT Away
 
 Trying to use a MacBook without a working battery would result in an extremely slow and unresponsive system because MacBook firmware actively prevents using a laptop without one by means of throttling, causing MacBook CPU to run at its lowest clock speed. This shouldn’t affect hackintosh laptops because they don’t have a Mac firmware (although they might exhibit similar behavior due to firmware tricks of their own). However, it *does* affect Intel iGPU graphics performance, which manifests in unusually slow 3D in certain applications, like browsers, or weird graphical issues, such as missing textures or models.
 
-Having no OEM batteries available for our ProBook we have to fix this issue by forcibly disabling BD PROCHOT, a special CPU flag which mainboard firmware uses to cause throttling.
+Having no OEM batteries available for our ProBook we have to fix this issue by forcibly disabling BD PROCHOT, – a special CPU flag that firmware sets, which causes throttling.
 
 Enable the `DisablePROCHOT.efi` bootloader driver:
 
