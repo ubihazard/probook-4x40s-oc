@@ -771,10 +771,10 @@ ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h3
 
   * In macOS add the boot arg to extract 256 MB of RAM:
 
-```xml
-<key>boot-args</key>
-<string>... maxmem=16128</string>
-```
+    ```xml
+    <key>boot-args</key>
+    <string>... maxmem=16128</string>
+    ```
 
     > Actually, the issue is *least* prominent on macOS, having a mild effect maybe only on the startup process, while Windows 11 is rendered literally unbootable.
 
