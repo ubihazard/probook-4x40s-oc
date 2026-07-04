@@ -286,7 +286,7 @@ ssdt3.dsl:        Method (_OFF, 0, Serialized)  // _OFF: Power Off
 
 Well, that was almost too easy: we quickly discover a suspiciously looking `ssdt3.dsl` table which is separate from main `dsdt.dsl` and contains single unique references to both `INI` and `OFF` (ACPI specification requires identifiers to be four characters long, thus additional `_`). Opening it in a plain text editor we can clearly see it can only be responsible for our dedicated GPU (`_SB_.PCI0.GFX0` ACPI path gives it away instantly):
 
-```aml
+```asl
 DefinitionBlock ("", "SSDT", 1, "SgRef", "SgTabl", 0x00001000)
 {
     External (_SB_.PCI0.GFX0, DeviceObj)
@@ -308,7 +308,7 @@ The general approach to ACPI patching is:
 
 Let‘s find out where our Radeon GPU gets enabled. The first method we bump into is `PX02` which contains some logic to turn dGPU on or off based on a parameter:
 
-```aml
+```asl
 Method (PX02, 1, Serialized)
 {
     CreateWordField (Arg0, 0x00, SIZI)
@@ -327,7 +327,7 @@ Method (PX02, 1, Serialized)
 
 We just want it off always so we create our own version of `PX02` method:
 
-```aml
+```asl
 // Original PX02 is renamed to ZX02
 Method (PX02, 1, Serialized)
 {
@@ -340,7 +340,7 @@ Notice we are calling the original (soon to be renamed) `ZX02` method, but we ar
 
 Now let’s take a look at the `_INI` method:
 
-```aml
+```asl
 Method (_INI, 0, NotSerialized)  // _INI: Initialize
 {
     Store (0x00, \_SB.PCI0.PEGP.DGFX._ADR)
@@ -349,7 +349,7 @@ Method (_INI, 0, NotSerialized)  // _INI: Initialize
 
 We can rewrite it to make it call `_OFF` immediately after the GPU is initialized:
 
-```aml
+```asl
 // Original _INI is renamed to ZINI
 Method (_INI, 0, NotSerialized)
 {
@@ -367,14 +367,14 @@ This could be it, but unfortunately things aren’t as simple. Although the abov
 
 Opening up main `dsdt.dsl` ACPI table we are looking for `_PTS` (“prepare to sleep”) and `_WAK` (“wake”) methods:
 
-```aml
+```asl
 Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
 {
     // Omitted for brevity
 }
 ```
 
-```aml
+```asl
 Method (_WAK, 1, NotSerialized)  // _WAK: Wake
 {
     // Omitted for brevity
@@ -383,7 +383,7 @@ Method (_WAK, 1, NotSerialized)  // _WAK: Wake
 
 Using the familiar approach we “rename” the original methods and create our patched replacements (actual renaming will happen later):
 
-```aml
+```asl
 // Original _PTS is renamed to ZPTS
 Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
 {
@@ -399,7 +399,7 @@ Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
 }
 ```
 
-```aml
+```asl
 // Original _WAK is renamed to ZWAK
 Method (_WAK, 1, NotSerialized)  // _WAK: Wake
 {
@@ -420,7 +420,7 @@ Method (_WAK, 1, NotSerialized)  // _WAK: Wake
 
 There’s another method we want to address in the main table, `_REG` [inside](ACPI/Original/dsdt.dsl#L6689) embedded controller device:
 
-```aml
+```asl
 Method (_REG, 2, NotSerialized)  // _REG: Region Availability
 {
     If (LEqual (Arg0, 0x03))
@@ -435,7 +435,7 @@ Method (_REG, 2, NotSerialized)  // _REG: Region Availability
 }
 ```
 
-```aml
+```asl
 // Original _REG is renamed to XREG
 Method (_REG, 2, NotSerialized)  // _REG: Region Availability
 {
