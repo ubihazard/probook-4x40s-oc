@@ -182,7 +182,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
 4.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card.
 
-5.  Trackpad [configuration](https://github.com/ubihazard/probook-4x30s-oc#configuring-trackpad) is identical to previous gen ProBooks.
+5.  Trackpad [configuration](https://github.com/ubihazard/probook-4x30s-oc#configuring-trackpad) is identical to previous gen ProBooks. For 40s series we are still using older `VoodooPS2Controller.kext` from RehabMan. The [Acidanthera](https://github.com/acidanthera/VoodooPS2) fork with Magic Trackpad II emulation unfortunately doesn’t appear to support Synaptics hardware used in these old ProBooks.
 
 6.  Choose your preferred Fn key [behavior](https://github.com/ubihazard/probook-4x30s-oc#function-keys).
 
