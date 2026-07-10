@@ -210,7 +210,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     <string>Custom</string>
     ```
 
-9.  Hibernation is not supported on a hackintosh. It must be [disabled](https://github.com/ubihazard/probook-4x30s-oc#disabling-hibernation).
+9.  Hibernation is not supported on a hackintosh. It must be [disabled](https://github.com/ubihazard/probook-4x30s-oc#disabling-hibernation):
 
     ```bash
     sudo pmset -a hibernatemode 0
@@ -220,7 +220,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     sudo mkdir /var/vm/sleepimage
     ```
 
-10. Make sure to [enable TRIM](https://github.com/ubihazard/probook-4x30s-oc#enabling-trim) for your SATA SSD (ignore the warning).
+10. Make sure to [enable TRIM](https://github.com/ubihazard/probook-4x30s-oc#enabling-trim) for your SATA SSD (ignore the warning):
 
     ```bash
     sudo trimforce enable
