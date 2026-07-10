@@ -33,7 +33,7 @@ We will be working with the following configuration[^1]:
 | **Card Reader** | JMicron JMB38X
 | **Optical Drive** | HP DVD-RAM GT80N
 | **macOS**    | Sequoia 15.7.7
-| **OpenCore** | [1.0.6-0cc8c81](https://github.com/ubihazard/OpenCorePkg-ProBook-Legacy/releases/tag/v1.0.6-0cc8c81) for legacy ProBook
+| **OpenCore** | [1.0.8-3eb5eea](https://github.com/ubihazard/OpenCorePkg-ProBook-Legacy/releases/tag/v1.0.8-3eb5eea) for legacy ProBook
 | **OCLP** | [2.4.1](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.4.1)
 
 [^1]: Webcam works up to Mojave. USB, Bluetooth and webcam need proper [USB port mapping](#fixing-usb). SD card reader might have issues past Monterey.
@@ -155,7 +155,7 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 
         1.  Turn on “Switchable Graphics” in BIOS.
         2.  Enable `SSDT-dGPU-OFF.aml` and `SSDT-dGPU-OFF2.aml` ACPI tables in `ACPI/Add`.
-        3.  Activate the following patches in `ACPI/Patch`:
+        3.  Activate the following ACPI patches in `ACPI/Patch`:
               * `GFX0 Method(PX02,1,S) to ZX02`
               * `DGFX Method(_INI,0,N) to ZINI`
               * `EC Method(_REG,2,N) to XREG`
@@ -210,20 +210,23 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     <string>Custom</string>
     ```
 
-9.  Apply the [quiet fan patch](https://github.com/ubihazard/probook-4x30s-oc#quiet-fan-patch) for much better fan behavior.
-
-10. Hibernation (deep sleep) is not supported on a hackintosh. It must be disabled:
+9.  Hibernation is not supported on a hackintosh. It must be [disabled](https://github.com/ubihazard/probook-4x30s-oc#disabling-hibernation).
 
     ```bash
     sudo pmset -a hibernatemode 0
     ```
-
-    Remove the sleep image, which preserves RAM contents during sleep, and replace it with an empty folder (this proved to work well to prevent it from being recreated):
-
     ```bash
     sudo rm /var/vm/sleepimage
     sudo mkdir /var/vm/sleepimage
     ```
+
+10. Make sure to [enable TRIM](https://github.com/ubihazard/probook-4x30s-oc#enabling-trim) for your SATA SSD (ignore the warning).
+
+    ```bash
+    sudo trimforce enable
+    ```
+
+11. Apply the [quiet fan patch](https://github.com/ubihazard/probook-4x30s-oc#quiet-fan-patch) for much better fan behavior.
 
 Disabling Radeon
 ----------------
@@ -711,7 +714,7 @@ Patches with original method renames belong to `ACPI/Patch`:
 Keeping BD PROCHOT Away
 -----------------------
 
-Trying to use a MacBook without a working battery would result in an extremely slow and unresponsive system because MacBook firmware actively prevents using a laptop without one by means of throttling, causing MacBook CPU to run at its lowest clock speed. This shouldn’t affect hackintosh laptops because they don’t have a Mac firmware (although they might exhibit similar behavior due to firmware tricks of their own). However, it *does* affect Intel iGPU graphics performance, which manifests in unusually slow 3D in certain applications, like browsers, or weird graphical issues, such as missing textures or models.
+Trying to use a MacBook without a working battery would result in an extremely slow and unresponsive system because MacBook firmware actively prevents using a laptop without one by means of throttling, causing CPU to run at its lowest clock speed. Normally, this shouldn’t affect hackintosh laptops because they don’t have a Mac firmware (although they might exhibit similar behavior due to firmware tricks of their own). However, it *does* affect Intel iGPU graphics performance, which manifests in unusually slow 3D in certain applications, like browsers, or weird graphical issues, such as missing textures or models.
 
 Having no OEM batteries available for our ProBook we have to fix this issue by forcibly disabling BD PROCHOT, – a special CPU flag that firmware sets, which causes throttling.
 
@@ -779,7 +782,7 @@ ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h3
 
   * Use `msconfig` system tool on Windows and set available RAM to `16128`. Boot with a single 8 GB stick first if you can’t reach the desktop.
 
-  * Add `mem=17G` kernel parameter if using a Linux-based OS.
+  * Add `mem=16128M` kernel parameter if using a Linux-based OS.
 
 ACPI Patching
 -------------
