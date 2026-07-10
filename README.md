@@ -196,7 +196,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
     [Fill](https://github.com/ubihazard/probook-4x30s-oc#filling-your-system-information) the rest of system information.
 
-8.  To fix dual-boot issues with Windows we need to make couple adjustments. Set `CustomSMBIOSGuid` to `true` under `Kernel/Quirks`:
+8.  To [fix](https://github.com/ubihazard/probook-4x30s-oc#windows-dual-boot-issues) dual-boot issues with Windows we need to make couple adjustments. Set `CustomSMBIOSGuid` to `true` under `Kernel/Quirks`:
 
     ```xml
     <key>CustomSMBIOSGuid</key>
