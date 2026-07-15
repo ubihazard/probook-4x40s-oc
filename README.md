@@ -92,11 +92,12 @@ We will be enabling some and disabling others during the [post-install](#post-in
 Installation
 ------------
 
+> [!IMPORTANT]
+> Update your laptop BIOS to the latest version from HP support website. The included ACPI patches should work with any BIOS version but only the latest was actually tested.
+
 It is assumed that you are already familiar with [OpenCore](https://github.com/acidanthera/OpenCorePkg) bootloader, which is a backbone for all macOS installs on non-Apple hardware nowadays, its configuration process, and setup mechanics in general. To avoid repetition I will not be reproducing large config sections for each step. Refer to [4x30s guide](https://github.com/ubihazard/probook-4x30s-oc "ProBook 30s series install guide") and Dortania [Ivy Bridge laptop guide](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html "Laptop Ivy Bridge OpenCore guide") in addition to this guide for details.
 
-0.  Choose macOS version you would like to install. Monterey is recommended for a good combination of up-to-date software support and stable performance. Stick to Big Sur if you would like to avoid root patches. It is modern enough and has decent software support. Ventura and later require AVX2 emulation via [CryptexFixup](https://github.com/acidanthera/CryptexFixup) while Sequoia is the latest version you can install.
-
-1.  Make a [bootable macOS USB installer](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/) according to Dortania guide.
+1.  Choose macOS version you would like to install. Monterey is recommended for a good combination of up-to-date software support and stable performance. Stick to Big Sur if you would like to avoid root patches. It is modern enough and has decent software support. Ventura and later require AVX2 emulation via [CryptexFixup](https://github.com/acidanthera/CryptexFixup) while Sequoia is the latest version you can install. Make a [bootable macOS USB installer](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/) according to Dortania guide.
 
 2.  Mount EFI partition on a USB installer and copy OpenCore files downloaded from [releases page](https://github.com/ubihazard/probook-4x40s-oc/releases/latest "Download"). Replace `config.plist` with `config-usb.plist` to keep the configuration variant modified specifically for use with macOS installer.
 
