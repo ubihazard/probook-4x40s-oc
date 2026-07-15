@@ -228,6 +228,8 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
 11. Apply the [quiet fan patch](https://github.com/ubihazard/probook-4x30s-oc#quiet-fan-patch) for much better fan behavior.
 
+12. [Customize](https://github.com/ubihazard/probook-4x30s-oc#custom-drive-icon-and-label) your macOS installation entry in OpenCore boot picker.
+
 Disabling Radeon
 ----------------
 
