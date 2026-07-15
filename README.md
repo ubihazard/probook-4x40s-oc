@@ -181,11 +181,13 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
 4.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card.
 
-5.  Trackpad [configuration](https://github.com/ubihazard/probook-4x30s-oc#configuring-trackpad) is identical to previous gen ProBooks. For 40s series we are still using older `VoodooPS2Controller.kext` from RehabMan. The Acidanthera [fork](https://github.com/acidanthera/VoodooPS2) with Magic Trackpad II emulation unfortunately doesn’t appear to support Synaptics hardware used in these old ProBooks.
+5.  Enable JMicron [card reader](https://github.com/ubihazard/probook-4x30s-oc#enabling-sd-card-reader). ProBook 4x30s and 4x40s share the same exact card reader model.
 
-6.  Choose your preferred Fn key [behavior](https://github.com/ubihazard/probook-4x30s-oc#function-keys).
+6.  Trackpad [configuration](https://github.com/ubihazard/probook-4x30s-oc#configuring-trackpad) is identical to previous gen ProBooks. For 40s series we are still using older `VoodooPS2Controller.kext` from RehabMan. The Acidanthera [fork](https://github.com/acidanthera/VoodooPS2) with Magic Trackpad II emulation unfortunately doesn’t appear to support Synaptics hardware used in these old ProBooks.
 
-7.  Set the appropriate SMBIOS for your laptop: `MacBookPro9,1` if you’ve got quad-core CPU installed in your ProBook, `MacBookPro9,2` for dual-core configurations. If you need to change from the stock `MacBookPro9,1` name set in the [provided](EFI/OC/config.plist#L2501) `config.plist` make sure to also [adjust](https://github.com/ubihazard/probook-4x30s-oc#usb-port-mapping-in-smbios) both USB map kexts (there’s an additional `USBMap.kext` in `Legacy` subfolder). Now you can use `macserial` tool from OpenCore utilities to generate serials:
+7.  Choose your preferred Fn key [behavior](https://github.com/ubihazard/probook-4x30s-oc#function-keys).
+
+8.  Set the appropriate SMBIOS for your laptop: `MacBookPro9,1` if you’ve got quad-core CPU installed in your ProBook, `MacBookPro9,2` for dual-core configurations. If you need to change from the stock `MacBookPro9,1` name set in the [provided](EFI/OC/config.plist#L2501) `config.plist` make sure to also [adjust](https://github.com/ubihazard/probook-4x30s-oc#usb-port-mapping-in-smbios) both USB map kexts (there’s an additional `USBMap.kext` in `Legacy` subfolder). Now you can use `macserial` tool from OpenCore utilities to generate serials:
 
     ```bash
     ./macserial -m 'MacBookPro9,1' -n 1
@@ -195,7 +197,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
     [Fill](https://github.com/ubihazard/probook-4x30s-oc#filling-your-system-information) the rest of system information.
 
-8.  To [fix](https://github.com/ubihazard/probook-4x30s-oc#windows-dual-boot-issues) dual-boot issues with Windows we need to make couple adjustments. Set `CustomSMBIOSGuid` to `true` under `Kernel/Quirks`:
+9.  To [fix](https://github.com/ubihazard/probook-4x30s-oc#windows-dual-boot-issues) dual-boot issues with Windows we need to make couple adjustments. Set `CustomSMBIOSGuid` to `true` under `Kernel/Quirks`:
 
     ```xml
     <key>CustomSMBIOSGuid</key>
@@ -209,7 +211,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     <string>Custom</string>
     ```
 
-9.  Hibernation is not supported on a hackintosh. It must be [disabled](https://github.com/ubihazard/probook-4x30s-oc#disabling-hibernation):
+10. Hibernation is not supported on a hackintosh. It must be [disabled](https://github.com/ubihazard/probook-4x30s-oc#disabling-hibernation):
 
     ```bash
     sudo pmset -a hibernatemode 0
@@ -219,15 +221,15 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     sudo mkdir /var/vm/sleepimage
     ```
 
-10. Make sure to [enable TRIM](https://github.com/ubihazard/probook-4x30s-oc#enabling-trim) for your SATA SSD (ignore the warning):
+11. Make sure to [enable TRIM](https://github.com/ubihazard/probook-4x30s-oc#enabling-trim) for your SATA SSD (ignore the warning):
 
     ```bash
     sudo trimforce enable
     ```
 
-11. Apply the [quiet fan patch](https://github.com/ubihazard/probook-4x30s-oc#quiet-fan-patch) for much better fan behavior.
+12. Apply the [quiet fan patch](https://github.com/ubihazard/probook-4x30s-oc#quiet-fan-patch) for much better fan behavior.
 
-12. [Customize](https://github.com/ubihazard/probook-4x30s-oc#custom-drive-icon-and-label) your macOS installation entry in OpenCore boot picker.
+13. [Customize](https://github.com/ubihazard/probook-4x30s-oc#custom-drive-icon-and-label) your macOS installation entry in OpenCore boot picker.
 
 Disabling Radeon
 ----------------
