@@ -83,7 +83,6 @@ Kernel Extensions
   * `AppleIntelCPUPowerManagement.kext`: Restore legacy CPU PM
       * `AppleIntelCPUPowerManagementClient.kext`
   * `ASPP-Override.kext`: Force legacy CPU power management on Monterey
-  * `AdvancedMap.kext`: Fix Apple Maps on Monterey
   * `ACPIPoller.kext`: Laptop fan control
   * `NoTouchID.kext`: Disable Touch ID
   * `SimpleMSR.kext`: Fix BD PROCHOT due to lack of working battery
