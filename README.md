@@ -36,7 +36,7 @@ We will be working with the following configuration[^1]:
 | **OpenCore** | [1.0.8-3eb5eea](https://github.com/ubihazard/OpenCorePkg-ProBook-Legacy/releases/tag/v1.0.8-3eb5eea) for legacy ProBook
 | **OCLP** | [2.4.1](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.4.1)
 
-[^1]: Webcam works up to Mojave. USB, Bluetooth and webcam need proper [USB port mapping](#fixing-usb). SD card reader might have issues past Monterey.
+[^1]: Webcam works up to Mojave. USB, Bluetooth and webcam need proper [USB port mapping](#fixing-usb). SD card reader might have issues past Ventura.
 
 OpenCore for Legacy ProBook
 ---------------------------
