@@ -66,19 +66,19 @@ Kernel Extensions
   * `AppleALC.kext` [1.9.7]: Audio patches
   * `USBMap.kext`: USB port map
       * `USBInjectAll.kext` [0.8.1]: Initial setup and port mapping
+  * `BrcmFirmwareData.kext`: Broadcom firmware data
+      * `BrcmFirmwareRepo.kext`
+  * `BlueToolFixup.kext` [2.7.2]: Wireless (Bluetooth)
+      * `BrcmBluetoothInjector.kext`
+      * `BrcmPatchRAM3.kext`
+      * `BrcmPatchRAM2.kext`
   * `AirportBrcmFixup.kext` [2.2.0]: Wireless (Wi-Fi)
       * `AirPortBrcmNIC_Injector.kext`
       * `AirPortBrcm4360_Injector.kext`
-  * `BlueToolFixup.kext` [2.7.2]: Wireless (Bluetooth)
-      * `BrcmBluetoothInjector.kext`
-  * `BrcmFirmwareData.kext`: Broadcom firmware data
-      * `BrcmFirmwareRepo.kext`
-  * `BrcmPatchRAM3.kext`: Additional wireless
-      * `BrcmPatchRAM2.kext`
   * `JMB38X.kext` [1.5.0]: SD card reader
       * `HSSDBlockStorage.kext`
   * `FeatureUnlock.kext` [1.1.8]: Enable Sidecar, AirPlay, etc.
-  * `IOSkywalkFamily.kext`: Restore legacy Broadcom wireless
+  * `IOSkywalkFamily.kext`: Restore Broadcom wireless on Sonoma+
       * `IO80211FamilyLegacy.kext`
   * `AppleIntelCPUPowerManagement.kext`: Restore legacy CPU PM
       * `AppleIntelCPUPowerManagementClient.kext`
