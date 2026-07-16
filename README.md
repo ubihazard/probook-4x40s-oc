@@ -78,8 +78,8 @@ Kernel Extensions
   * `JMB38X.kext` [1.5.0]: SD card reader
       * `HSSDBlockStorage.kext`
   * `FeatureUnlock.kext` [1.1.8]: Enable Sidecar, AirPlay, etc.
-  * `IOSkywalkFamily.kext`: Restore Broadcom wireless on Sonoma+
-      * `IO80211FamilyLegacy.kext`
+  * `IOSkywalkFamily.kext` [1.2.0]: Restore Broadcom wireless on Sonoma+
+      * `IO80211FamilyLegacy.kext` [1.0.0]
   * `AppleIntelCPUPowerManagement.kext`: Restore legacy CPU PM
       * `AppleIntelCPUPowerManagementClient.kext`
   * `ASPP-Override.kext`: Force legacy CPU power management on Monterey
