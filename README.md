@@ -6,8 +6,6 @@
 
 Detailed instructions on how to install recent version of [macOS](https://en.wikipedia.org/wiki/MacOS) on HP ProBook 40s series laptops with third generation Ivy Bridge Intel Core i CPUs, – specifically, a [ProBook 4540s](https://support.hp.com/us-en/product/product-specs/model/5229457).
 
-![](Images/probook-4540s-on-sequoia.png)
-
 > [!IMPORTANT]
 > A previous [guide for 30s series laptops](https://github.com/ubihazard/probook-4x30s-oc "macOS for ProBook 4x30s") with second generation Intel Sandy Bridge CPUs and non-metal graphics is still available for reference. Some content is kept there to avoid duplication.
 
