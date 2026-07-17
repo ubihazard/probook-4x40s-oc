@@ -101,13 +101,13 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 
     Ventura and later require AVX2 emulation via [CryptexFixup](https://github.com/acidanthera/CryptexFixup), while Sequoia is the latest version you can install. Now, make a [bootable macOS USB installer](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/) according to Dortania guide.
 
-  > [!NOTE]
-  > The EFI configuration for ProBook 40x series now uses new, more modern method of VMM spoofing for USB installer, which is required to install macOS Sequoia as it helps to avoid hideous “An error occurred while preparing the software update” message during the final step of installation process. It tricks macOS installer into thinking that it is running inside a VM, causing it to skip real Mac firmware installation, which is the root cause of the error above.
-  >
-  > This method of spoofing is *compatible only with Big Sur and above*. If, for some reason, you decide to install Catalina or older you need to make edits to `config-usb.plist`.
-  >
-  >   * Disable `Skip board ID check` patch under `Booter/Patch`.
-  >   * Remove `sbvmm` quirk from `RestrictEvents` settings [stored in a NVRAM parameter](blob/b20bbb4985a02d46d8444ee707b4d99e73c7db6f/EFI/OC/config-usb.plist#L2323):
+> [!NOTE]
+> The EFI configuration for ProBook 40x series now uses new, more modern method of VMM spoofing for USB installer, which is required to install macOS Sequoia as it helps to avoid hideous “An error occurred while preparing the software update” message during the final step of installation process. It tricks macOS installer into thinking that it is running inside a VM, causing it to skip real Mac firmware installation, which is the root cause of the error above.
+>
+> This method of spoofing is *compatible only with Big Sur and above*. If, for some reason, you decide to install Catalina or older you need to make edits to `config-usb.plist`.
+>
+>   * Disable `Skip board ID check` patch under `Booter/Patch`.
+>   * Remove `sbvmm` quirk from `RestrictEvents` settings [stored in a NVRAM parameter](blob/b20bbb4985a02d46d8444ee707b4d99e73c7db6f/EFI/OC/config-usb.plist#L2323):
 
 2.  Mount EFI partition on a USB installer and copy OpenCore files downloaded from [releases page](https://github.com/ubihazard/probook-4x40s-oc/releases/latest "Download"). Replace `config.plist` with `config-usb.plist` to keep the configuration variant modified specifically for use with macOS installer.
 
