@@ -188,9 +188,9 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
     > We don’t explicitly disable AMFI via `amfi=0x80` boot arg because it is handled by `AMFIPass.kext` in updated configuration instead. `amfi=0x80` is still used in a USB config though.
 
-3.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches.
+3.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card on Big Sur and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom cards. It is installed in the next step.
 
-4.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card.
+4.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied too, if you are using Broadcom wireless on Sonoma+.
 
 5.  Enable JMicron [card reader](https://github.com/ubihazard/probook-4x30s-oc#enabling-sd-card-reader). ProBooks 4x30s and 4x40s share the same exact card reader model.
 
