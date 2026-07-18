@@ -97,16 +97,16 @@ Installation
 
 It is assumed that you are already familiar with [OpenCore](https://github.com/acidanthera/OpenCorePkg) bootloader, which is a backbone for all macOS installs on non-Apple hardware nowadays, its configuration process, and setup mechanics in general. To avoid repetition I will not be reproducing large config sections for each step. Refer to [4x30s guide](https://github.com/ubihazard/probook-4x30s-oc "ProBook 30s series install guide") and Dortania [Ivy Bridge laptop guide](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html "Laptop Ivy Bridge OpenCore guide") in addition to this guide for details.
 
-1.  Choose macOS version you would like to install. Monterey is recommended for a good combination of up-to-date software support and stable performance. Stick to Big Sur if you would like to avoid root patches or if you are stuck with Atheros wi-fi card and cannot upgrade to Broadcom. It is modern enough and has decent software support.
+1.  Choose macOS version you would like to install. Monterey is recommended for a good combination of up-to-date software support and stable performance. Stick to Big Sur if you would like to avoid root patches or if you are stuck with Atheros Wi-Fi card and cannot upgrade to Broadcom. It is modern enough and has decent software support.
 
-    Ventura and later require AVX2 emulation via [CryptexFixup](https://github.com/acidanthera/CryptexFixup), while Sequoia is the latest version you can install. Now, make a [bootable macOS USB installer](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/) according to Dortania guide.
+    Ventura and later require AVX2 emulation via [CryptexFixup](https://github.com/acidanthera/CryptexFixup), while Sequoia is the latest version you can install. The earliest macOS supported by this configuration is Mojave. Now, make a [bootable macOS USB installer](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/) according to Dortania guide.
 
 > [!NOTE]
 > The EFI configuration for ProBook 40x series now uses new, more modern method of VMM spoofing for USB installer, which is required to install macOS Sequoia as it helps to avoid hideous “An error occurred while preparing the software update” message during the final step of installation process. It tricks macOS installer into thinking that it is running inside a VM, causing it to skip real Mac firmware installation, which is the root cause of the error above.
 >
-> This method of spoofing is *compatible only with Big Sur and above*. If, for some reason, you decide to install Catalina or older you need to make edits to `config-usb.plist`.
+> This method of spoofing is *compatible only with Big Sur and above*. If, for some reason, you decided to install Catalina or older you need to make edits to `config-usb.plist`.
 >
->   * Disable `Skip board ID check` patch under `Booter/Patch`.
+>   * Disable `Skip board ID check` [patch](https://github.com/ubihazard/probook-4x40s-oc/blob/b20bbb4985a02d46d8444ee707b4d99e73c7db6f/EFI/OC/config-usb.plist#L1190) under `Booter/Patch`.
 >   * Remove `sbvmm` quirk from `RestrictEvents` settings [stored in a NVRAM parameter](https://github.com/ubihazard/probook-4x40s-oc/blob/b20bbb4985a02d46d8444ee707b4d99e73c7db6f/EFI/OC/config-usb.plist#L2323):
 
 2.  Mount EFI partition on a USB installer and copy OpenCore files downloaded from [releases page](https://github.com/ubihazard/probook-4x40s-oc/releases/latest "Download"). Replace `config.plist` with `config-usb.plist` to keep the configuration variant modified specifically for use with macOS installer.
@@ -186,19 +186,19 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     <data>AwgAAA==</data>
     ```
 
-    > We don’t explicitly disable AMFI via `amfi=0x80` boot arg because it is handled by `AMFIPass.kext` in updated configuration instead. `amfi=0x80` is still used in a USB config though.
+    > We don’t explicitly disable AMFI via `amfi=0x80` boot arg because it is handled by `AMFIPass.kext` in updated configuration instead.
 
-3.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card on Big Sur and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom wi-fi. It is installed in the next step.
+3.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card with Big Sur and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom Wi-Fi. It is installed in the next step.
 
-4.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied too, if you are using Broadcom wireless on Sonoma+.
+4.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+.
 
 5.  Enable JMicron [card reader](https://github.com/ubihazard/probook-4x30s-oc#enabling-sd-card-reader). ProBooks 4x30s and 4x40s share the same exact card reader model.
 
-6.  Trackpad [configuration](https://github.com/ubihazard/probook-4x30s-oc#configuring-trackpad) is identical to previous gen ProBooks. For 40s series we are still using older `VoodooPS2Controller.kext` from RehabMan. The Acidanthera [fork](https://github.com/acidanthera/VoodooPS2) with Magic Trackpad II emulation unfortunately doesn’t appear to support Synaptics hardware used in these old ProBooks.
+6.  The trackpad [configuration](https://github.com/ubihazard/probook-4x30s-oc#configuring-trackpad) is identical to previous gen ProBooks. For 40s series we are still using older but perfectly functional `VoodooPS2Controller.kext` from RehabMan. The Acidanthera [fork](https://github.com/acidanthera/VoodooPS2) with Magic Trackpad II emulation unfortunately doesn’t appear to support Synaptics hardware used in these old ProBooks.
 
 7.  Choose your preferred Fn key [behavior](https://github.com/ubihazard/probook-4x30s-oc#function-keys).
 
-8.  Set the appropriate SMBIOS for your laptop: `MacBookPro9,1` if you’ve got quad-core CPU installed in your ProBook, `MacBookPro9,2` for dual-core configurations. If you need to change from the stock `MacBookPro9,1` name set in the [provided](EFI/OC/config.plist#L2501) `config.plist` make sure to also [adjust](https://github.com/ubihazard/probook-4x30s-oc#usb-port-mapping-in-smbios) both USB map kexts (there’s an additional `USBMap.kext` in `Legacy` subfolder). Now you can use `macserial` tool from OpenCore utilities to generate serials:
+8.  Set the appropriate SMBIOS for your laptop: `MacBookPro9,1` if you’ve got quad-core CPU installed in your ProBook, `MacBookPro9,2` for dual-core systems. If you need to change from the stock `MacBookPro9,1` name set in the [provided](EFI/OC/config.plist#L2501) `config.plist` make sure to also [adjust](https://github.com/ubihazard/probook-4x30s-oc#usb-port-mapping-in-smbios) both USB map kexts (there’s an additional `USBMap.kext` in `Legacy` subfolder). Now you can use `macserial` tool from OpenCore utilities to generate serials:
 
     ```bash
     ./macserial -m 'MacBookPro9,1' -n 1
@@ -316,9 +316,9 @@ DefinitionBlock ("", "SSDT", 1, "SgRef", "SgTabl", 0x00001000)
 The general approach to ACPI patching is:
 
   * Rename the method that you want to change.
-  * Create a new method with a modified code. It can reference other stuff in DSDT and potentially call the original renamed method if needed.
+  * Create a new method with original name and modified code. It can reference other stuff in DSDT and potentially call the original renamed method if needed.
   * Repeat for other methods you wish to patch.
-  * Place all new code in a separate SSDT table and inject it into ACPI using OpenCore during boot process.
+  * Place all new code in a separate SSDT table(s) and inject it into ACPI using OpenCore during boot process.
 
 ### 4. dGPU Disable Patch, Pt. 1
 
@@ -473,20 +473,20 @@ The complete second patch is [available](ACPI/SSDT-dGPU-OFF.dsl) for reference.
 
 ### 6. Compiling SSDT Tables with Patches
 
-Out plain text code must be turned into binary code usable by ACPI interpreter. This is done by means of compiling:
+Our plain text code must be turned into binary code usable by ACPI interpreter. This is done by means of [compiling](https://github.com/ubihazard/probook-legacy-macos-tools):
 
 ```bash
 iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p SSDT-dGPU-OFF.aml SSDT-dGPU-OFF.dsl
 iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p SSDT-dGPU-OFF2.aml SSDT-dGPU-OFF2.dsl
 ```
 
-The above commands will produce two binary files: `SSDT-dGPU-OFF.aml` and `SSDT-dGPU-OFF2.aml`.
+The above commands will produce two binary files: `SSDT-dGPU-OFF.aml` and `SSDT-dGPU-OFF2.aml` that must be copied to `EFI/OC/ACPI`.
 
 ### 7. Creating Rename Patches for Original Methods
 
 It was mentioned earlier several times that we need to rename original methods in order to replace them with our patched ones. So far we were looking at plain text code where these methods are used as if they were already renamed. But to actually rename them we have to create binary ACPI patches because obviously these methods don’t exist in plain text form. We will use OpenCore ACPI patching mechanisms to accomplish this.
 
-Open the original binary files of ACPI tables we were working on (`dsdt.aml` and `ssdt3.aml`) in a hex editor. Let’s say we want to create a binary rename patch for the `_REG` method inside `EC0`. Looking at `dsdt.aml` opened in a hex editor search for `_REG` ASCII string. There are many `_REG` methods in `dsdt.aml` that belong to various devices in search results but the one we are interested in is located at offset `0x6F08`: we can easily discern that by looking at surrounding binary code which shows many familiar identifiers (`PRIT`, `ECRG`, `WCOS`, etc.) that we saw in a source code of the `_REG` method we’ve been working on.
+Open the original binary files of ACPI tables we were working on (`dsdt.aml` and `ssdt3.aml`) in a hex editor. Let’s say we want to create a binary rename patch for the `_REG` method inside `EC0`. Looking at `dsdt.aml` opened in a hex editor, search for `_REG` ASCII string. There are many `_REG` methods in `dsdt.aml` that belong to various devices in search results but the one we are interested in is located at offset `0x6F08`: we can easily discern that by looking at surrounding binary code which shows many familiar identifiers (`PRIT`, `ECRG`, `WCOS`, etc.) that we saw in a source code of the `_REG` method we’ve been working on.
 
 Select ten bytes in a binary view starting at offset `0x6F08`, which gives us `5F52454702A02893680A03`. This will be our search pattern for the binary rename patch. This patch must be unique across entire ACPI code, otherwise we risk renaming something completely different in unknown location with potentially bad consequences, – hence us selecting more bytes and not just four. The original `_REG` ASCII string must be transformed into `XREG` in our patch so we modify the original pattern to derive our replacement from it: `5852454702A02893680A03`. Here we changed just one byte, `5F` to `58`, which is ASCII hexadecimal code for `X`.
 
@@ -730,7 +730,7 @@ Keeping BD PROCHOT Away
 
 Trying to use a MacBook without a working battery would result in an extremely slow and unresponsive system because MacBook firmware actively prevents using a laptop without one by means of throttling, causing CPU to run at its lowest clock speed. Normally, this shouldn’t affect hackintosh laptops because they don’t have a Mac firmware (although they might exhibit similar behavior due to firmware tricks of their own). However, it *does* affect Intel iGPU graphics performance, which manifests in unusually slow 3D in certain applications, like browsers, or weird graphical issues, such as missing textures or models.
 
-Having no OEM batteries available for our ProBook we have to fix this issue by forcibly disabling BD PROCHOT, – a special CPU flag that firmware sets, which causes throttling.
+Having no OEM batteries available for our ProBook we have to fix this issue by forcibly disabling BD PROCHOT, – a special CPU flag that operating system sets, which causes throttling.
 
 Enable the `DisablePROCHOT.efi` bootloader driver:
 
@@ -753,7 +753,7 @@ Enable the `DisablePROCHOT.efi` bootloader driver:
 ```
 </details>
 
-Enable the `SimpleMSR.kext` which will continue to keep BD PROCHOT disabled after startup, so it doesn’t return e.g. after sleep:
+Enable the `SimpleMSR.kext` which will continue to keep BD PROCHOT disabled after startup, so it doesn’t return, e.g. after sleep:
 
 <details>
 <summary><strong>Example</strong></summary><br>
@@ -794,7 +794,7 @@ ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h3
 
     > Actually, the issue is *least* prominent on macOS, having a mild effect maybe only on the startup process, while Windows 11 is rendered literally unbootable.
 
-  * Use `msconfig` system tool on Windows and set available RAM to `16128`. Boot with a single 8 GB stick first if you can’t reach the desktop.
+  * Use `msconfig` system tool on Windows and set available RAM to `16128`. Boot with a single 8 GB stick first if you can’t reach the desktop or need to install the operating system first.
 
   * Add `mem=16128M` kernel parameter if using a Linux-based OS.
 
