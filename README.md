@@ -473,7 +473,7 @@ The complete second patch is [available](ACPI/SSDT-dGPU-OFF.dsl) for reference.
 
 ### 6. Compiling SSDT Tables with Patches
 
-Our plain text code must be turned into binary code usable by ACPI interpreter. This is done by means of [compiling](https://github.com/ubihazard/probook-legacy-macos-tools):
+Our plain text code must be turned into binary code usable by ACPI interpreter. This is done by means of [compiling](https://github.com/ubihazard/probook-4x40s-oc/releases/ "RehabMan legacy ProBook macOS tools"):
 
 ```bash
 iasl -vw 2095 -vw 2146 -vw 2089 -vw 4089 -vi -vr -p SSDT-dGPU-OFF.aml SSDT-dGPU-OFF.dsl
