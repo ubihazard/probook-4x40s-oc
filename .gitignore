@@ -4,3 +4,4 @@ EFI/OC/*
 !EFI/OC/*.plist
 ./*.sh
 *.zip
+*.gz
