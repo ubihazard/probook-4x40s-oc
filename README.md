@@ -783,7 +783,7 @@ Enable the `SimpleMSR.kext` which will continue to keep BD PROCHOT disabled afte
 ProBook 40s 16 GB RAM Issue
 ---------------------------
 
-ProBook 40s laptops are known to suffer from a [weird firmware issue](https://h30434.www3.hp.com/t5/Notebook-Hardware-and-Upgrade-Questions/Performance-degrades-in-Probook-4540s-after-memory-upgrade/td-p/2268503) whereby installing 16 GB of RAM causes laptop to slow down to a crawl with a permanent near 100% CPU usage at idle. The cause of this behavior was never explained or addressed by HP, but, luckily, the solution was discovered and it is as simple as deducing 256 MB of RAM from the memory pool available to the system.
+ProBook 40s laptops are known to suffer from a [weird firmware bug](https://h30434.www3.hp.com/t5/Notebook-Hardware-and-Upgrade-Questions/Performance-degrades-in-Probook-4540s-after-memory-upgrade/td-p/2268503) whereby installing 16 GB of RAM causes laptop to slow down to a crawl with a permanent near 100% CPU usage at idle. The cause of this behavior was never explained or addressed by HP, but, luckily, the solution was discovered and it is as simple as deducing 256 MB of RAM from the memory pool available to the system.
 
   * In macOS add the boot arg to extract 256 MB of RAM:
 
