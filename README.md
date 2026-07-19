@@ -190,7 +190,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
 3.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card with Big Sur and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom Wi-Fi. It is installed in the next step.
 
-4.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+.
+4.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download [OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher "OpenCore Legacy Patcher") and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+.
 
 5.  Enable JMicron [card reader](https://github.com/ubihazard/probook-4x30s-oc#enabling-sd-card-reader). ProBooks 4x30s and 4x40s share the same exact card reader model.
 
@@ -198,7 +198,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
 7.  Choose your preferred Fn key [behavior](https://github.com/ubihazard/probook-4x30s-oc#function-keys).
 
-8.  Set the appropriate SMBIOS for your laptop: `MacBookPro9,1` if you’ve got quad-core CPU installed in your ProBook, `MacBookPro9,2` for dual-core systems. If you need to change from the stock `MacBookPro9,1` name set in the [provided](EFI/OC/config.plist#L2501) `config.plist` make sure to also [adjust](https://github.com/ubihazard/probook-4x30s-oc#usb-port-mapping-in-smbios) both USB map kexts (there’s an additional `USBMap.kext` in `Legacy` subfolder). Now you can use `macserial` tool from OpenCore utilities to generate serials:
+8.  Set the appropriate SMBIOS for your laptop: `MacBookPro9,1` if you’ve got a quad-core CPU installed in your ProBook, `MacBookPro9,2` for dual-core systems. If you need to change from the stock `MacBookPro9,1` name set in the [provided](EFI/OC/config.plist#L2501) `config.plist` make sure to also [adjust](https://github.com/ubihazard/probook-4x30s-oc#usb-port-mapping-in-smbios) both USB map kexts (there’s an additional `USBMap.kext` in `Legacy` subfolder). Now you can use `macserial` tool from OpenCore utilities to generate serials:
 
     ```bash
     ./macserial -m 'MacBookPro9,1' -n 1
