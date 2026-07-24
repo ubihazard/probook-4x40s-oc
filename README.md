@@ -193,7 +193,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 4.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+.
 
 > [!NOTE]
-> Sequoia may require internet connection to download recent frameworks and fix HD 4000 graphics. Use wired ethernet or patch wireless first, reboot and relaunch OCLP to patch graphics.
+> Sequoia may require internet connection for OCLP to discover and download recent frameworks for HD 4000 graphics patching. Use wired ethernet or patch wireless first, then reboot and relaunch OCLP to patch graphics.
 
 5.  Enable JMicron [card reader](https://github.com/ubihazard/probook-4x30s-oc#enabling-sd-card-reader). ProBooks 4x30s and 4x40s share the same exact card reader model.
 
