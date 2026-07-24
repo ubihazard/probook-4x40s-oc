@@ -273,7 +273,7 @@ acpixtract -a acpi_tables.txt
 
 (You might need to install `acpidump` first: e.g. `sudo apt-get install acpidump` if using Ubuntu.)
 
-Copy extracted `.aml` tables to another USB stick and transfer them to your work environment. The tables that you extracted are in a compiled binary format. Use [iasl]() and a [decompilation script](ACPI/decompile.sh) to convert them into readable source text format.
+Copy extracted `.aml` tables to another USB stick and transfer them to your work environment. The tables that you extracted are in a compiled binary format. Use [iasl](https://github.com/ubihazard/probook-4x40s-oc/releases/ "RehabMan legacy ProBook macOS tools") and a [decompilation script](ACPI/decompile.sh) to convert them into readable source text format.
 
 ### 2. Finding References to dGPU
 
