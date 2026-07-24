@@ -190,6 +190,13 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
 3.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card with Big Sur and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom Wi-Fi. It is applied in the next step.
 
+      * Monterey+: if Broadcom Wi-Fi randomly disappears after boot, add a delay before the driver is loaded:
+
+        ```xml
+        <key>boot-args</key>
+        <string>... brcmfx-driver=1 brcmfx-delay=15000 ...</string>
+        ```
+
 4.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+.
 
 > [!NOTE]
