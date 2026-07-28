@@ -175,7 +175,7 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 Post-install
 ------------
 
-We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Post-installation guide") to make the system fully usable. Unless you decided to install Big Sur or earlier, you’d be stuck without hardware graphics acceleration and, as a result, very slow and unusable user interface. This and other things, like Wi-Fi and Bluetooth, is fixed here.
+We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Post-installation guide") to make the system fully usable. Unless you decided to install Big Sur or earlier, you’d be stuck without hardware graphics acceleration and, as a result, very slow and unusable user interface, and probably without working Wi-Fi too.
 
 1.  Set the values of `MinVersion` and `MinDate` in `UEFI/APFS` [according](https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html#apfs) to macOS version you have installed. For Big Sur and above just leave both at `0`.
 
@@ -188,7 +188,11 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
     > We don’t explicitly disable AMFI via `amfi=0x80` boot arg because it is handled by `AMFIPass.kext` in updated configuration instead.
 
-3.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card on Big Sur and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom Wi-Fi. It is applied in the next step.
+3.  Enable Wi-Fi and Bluetooth.
+
+      * See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card on Big Sur.
+
+      * Or [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom Wi-Fi. It is applied in the next step.
 
       * Monterey+: if Broadcom Wi-Fi randomly disappears after boot, add a delay before the driver is loaded:
 
