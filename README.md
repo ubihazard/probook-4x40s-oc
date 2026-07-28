@@ -128,7 +128,7 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 
 5.  Reboot your ProBook with the USB installer. During setup the machine will restart several times and if everything goes well you will end up on macOS welcome screen.
 
-6.  Copy OpenCore files to your system EFI partition so you can boot without USB. This time keep the `config.plist` from [EFI folder](https://github.com/ubihazard/probook-4x40s-oc/releases/latest "Download"), not `config-usb.plist`.
+6.  Copy OpenCore files to the system EFI partition on your SSD drive so you can boot without USB. This time keep the `config.plist` from [EFI folder](https://github.com/ubihazard/probook-4x40s-oc/releases/latest "Download"), not `config-usb.plist`.
 
 7.  Connect ethernet cable to your laptop. The next step requires working internet connection to download Intel CPU PM ACPI tables so we can restore power management for the exact processor used in your ProBook. Without proper CPU PM `AppleIntelCPUPowerManagement.kext` would cause kernel panic at boot so `NullCPUPowerManagement.kext` is used (in USB `config.plist`) to temporarily overtake control from it.
 
@@ -188,7 +188,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 
     > We don’t explicitly disable AMFI via `amfi=0x80` boot arg because it is handled by `AMFIPass.kext` in updated configuration instead.
 
-3.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card with Big Sur and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom Wi-Fi. It is applied in the next step.
+3.  Enable Wi-Fi and Bluetooth. See [here](https://github.com/ubihazard/probook-4x30s-oc#enabling-wifi-and-bluetooth) if you’ve got Atheros card on Big Sur and [here](https://github.com/ubihazard/probook-4x30s-oc#broadcom-configuration) if you’ve installed a compatible Broadcom card. Sonoma and later need a root patch to restore Broadcom Wi-Fi. It is applied in the next step.
 
       * Monterey+: if Broadcom Wi-Fi randomly disappears after boot, add a delay before the driver is loaded:
 
@@ -197,7 +197,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
         <string>... brcmfx-driver=1 brcmfx-delay=15000 ...</string>
         ```
 
-4.  Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+.
+4.  Reboot without USB (this **is** important). Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+. At this point you should already be booting directly from SSD, otherwise OCLP won’t be able to figure out proper root patches, because booting using USB installer doesn’t set correct SMBIOS name for the system.
 
 > [!NOTE]
 > Sequoia may require internet connection for OCLP to discover and download recent frameworks for HD 4000 graphics patching. Use wired ethernet or patch wireless first, then reboot and relaunch OCLP to patch graphics.
