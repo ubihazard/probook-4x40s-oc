@@ -201,7 +201,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
         <string>... brcmfx-driver=1 brcmfx-delay=15000 ...</string>
         ```
 
-4.  Reboot without USB (this **is** important). Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+. At this point you should already be booting directly from SSD, otherwise OCLP won’t be able to figure out proper root patches, because booting using USB installer doesn’t set correct SMBIOS name for the system.
+4.  Reboot without USB (this *is* important). Intel HD 4000 isn’t natively supported by macOS since Monterey. [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher "OCLP") must be used to install patched graphics kexts and frameworks that restore hardware graphics acceleration. Download OCLP and allow it to install root patches. During this step the “Modern wireless” patch would be applied as well, if you are using Broadcom wireless on Sonoma+. At this point you should already be booting directly from SSD, otherwise OCLP won’t be able to figure out proper root patches, because booting using USB installer doesn’t set correct SMBIOS name for the system.
 
 > [!NOTE]
 > Sequoia may require internet connection for OCLP to discover and download recent frameworks for HD 4000 graphics patching. Use wired ethernet or patch wireless first, then reboot and relaunch OCLP to patch graphics.
