@@ -259,7 +259,7 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
 Updating Patched macOS
 ----------------------
 
-Root patches installed with OCLP will prevent incremental OS updates due to broken volume seal. Even minor updates, such as from 15.7.7 to 15.7.8, would require downloading entire macOS installer to perform an upgrade.
+Root patches installed with OCLP will prevent incremental OS updates due to broken volume seal. Even minor updates, such as from 15.7.7 to 15.7.8, would require downloading the entire macOS installer to perform an upgrade.
 
   * Grab the USB macOS installer, you can re-use the USB installer you made previously to do the initial setup, – we only need the OpenCore bootloader itself with its USB config. The actual macOS installer version that is on the USB does not matter, because we aren’t going to reinstall the system.
 
@@ -269,9 +269,9 @@ Root patches installed with OCLP will prevent incremental OS updates due to brok
 
   * Use the USB stick to reboot back into macOS you intend to update. It is important to boot into the operating system specifically through the OpenCore that is on the USB, not the OpenCore installed on your SSD. The USB version has a simple textual interface with vertical menu entries whereas the OpenCore on the SSD has a graphical boot menu with icons, so you can clearly see which one your are booting from.
 
-  * Launch the “Install macOS.app” to start the upgrade process. Keep rebooting through the USB OpenCore until the process is fully complete.
+  * Launch the “Install macOS.app” to start the upgrade process. Keep rebooting through the USB OpenCore as installer progresses until the process is fully complete.
 
-  * Remove the USB stick, boot into the upgraded OS normally and reinstall the root patches. You may need to connect ethernet cable to be able to download the patched graphics frameworks.
+  * Remove the USB stick, boot into the updated OS normally and reinstall the root patches. You may need to connect ethernet cable to be able to download the patched graphics frameworks.
 
 Disabling Radeon
 ----------------
