@@ -271,7 +271,7 @@ Root patches installed with OCLP will prevent incremental OS updates due to brok
 
   * Launch the “Install macOS.app” to start the upgrade process. Keep rebooting through the USB OpenCore as installer progresses until the process is fully complete.
 
-  * Remove the USB stick, boot into the updated OS normally and reinstall the root patches. You may need to connect ethernet cable to be able to download the patched graphics frameworks.
+  * Remove the USB stick, boot into the updated OS normally and reinstall the root patches. You may need to connect ethernet cable to be able to download the patched graphics frameworks before Wi-Fi is working again.
 
 Disabling Radeon
 ----------------
