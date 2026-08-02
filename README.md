@@ -252,9 +252,11 @@ We still got [stuff to do](https://dortania.github.io/OpenCore-Post-Install/ "Po
     sudo trimforce enable
     ```
 
-12. Apply the [quiet fan patch](https://github.com/ubihazard/probook-4x30s-oc#quiet-fan-patch) for much better fan behavior.
+12. [Disable Spotlight indexing](https://github.com/ubihazard/probook-4x30s-oc#disable-spotlight-indexing) to improve system performance. Optionally, also run a [debloater](https://github.com/Wamphyre/macOS_Silverback-Debloater) script (do *not* disable iCloud services).
 
-13. [Customize](https://github.com/ubihazard/probook-4x30s-oc#custom-drive-icon-and-label) your macOS installation entry in OpenCore boot picker.
+13. Apply the [quiet fan patch](https://github.com/ubihazard/probook-4x30s-oc#quiet-fan-patch) for much better fan behavior.
+
+14. [Customize](https://github.com/ubihazard/probook-4x30s-oc#custom-drive-icon-and-label) your macOS installation entry in OpenCore boot picker.
 
 Updating Patched macOS
 ----------------------
