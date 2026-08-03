@@ -32,7 +32,7 @@ We will be working with the following configuration[^1]:
 | **USB 3.0**  | ASMedia
 | **Card Reader** | JMicron JMB38X
 | **Optical Drive** | HP DVD-RAM GT80N
-| **macOS**    | Sequoia 15.7.7
+| **macOS**    | Sequoia 15.7.8
 | **OpenCore** | [1.0.8-3eb5eea](https://github.com/ubihazard/OpenCorePkg-ProBook-Legacy/releases/tag/v1.0.8-3eb5eea) for legacy ProBook
 | **OCLP** | [2.4.1](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.4.1)
 
