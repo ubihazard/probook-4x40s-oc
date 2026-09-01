@@ -152,8 +152,6 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 
       * Locate `NullCPUPowerManagement.kext` entry in `Kernel/Add` and disable it.
 
-      * For Monterey or later make sure `ASPP-Override.kext` is enabled too. It is required to restore legacy CPU power management which was at some point removed in Monterey.
-
 8.  The USB port map kext from the provided EFI folder should work for all ProBook 4540s models. If you’d like to make your own, use [USBMap](https://github.com/corpnewt/USBMap) while still booted from the USB to re-map ports and make your own `USBMap.kext`. This procedure is fully covered in Dortania [guide](https://dortania.github.io/OpenCore-Post-Install/usb/ "USB port mapping guide") and I won‘t be duplicating it here.
 
 9.  For laptops with additional discrete GPU it needs to be disabled. There are two ways you can go about this.
