@@ -152,7 +152,7 @@ It is assumed that you are already familiar with [OpenCore](https://github.com/a
 
       * Locate `NullCPUPowerManagement.kext` entry in `Kernel/Add` and disable it.
 
-      * `ASPP-Override.kext` used to enable legacy CPU power management on [previous](https://github.com/ubihazard/probook-4x30s-oc) Sandy Bridge models in Monterey+ is *not* needed for Ivy Bridge and must be removed.
+      * `ASPP-Override.kext` used to enable legacy CPU power management on [previous](https://github.com/ubihazard/probook-4x30s-oc) Sandy Bridge models in Monterey+ is *not* needed for Ivy Bridge and must be removed. Keeping it on will cause CPU to loose turbo boost.
 
 8.  The USB port map kext from the provided EFI folder should work for all ProBook 4540s models. If you’d like to make your own, use [USBMap](https://github.com/corpnewt/USBMap) while still booted from the USB to re-map ports and make your own `USBMap.kext`. This procedure is fully covered in Dortania [guide](https://dortania.github.io/OpenCore-Post-Install/usb/ "USB port mapping guide") and I won‘t be duplicating it here.
 
