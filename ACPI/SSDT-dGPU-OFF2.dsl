@@ -6,8 +6,6 @@ DefinitionBlock ("", "SSDT", 2, "HPHACK", "GpuOf2", 0x00001000)
     External(\_SB.PCI0.GFX0, DeviceObj)
     External(\_SB.PCI0.GFX0.ZX02, MethodObj)
     External(\_SB.PCI0.PEGP.DGFX, DeviceObj)
-    External(\_SB.PCI0.PEGP.DGFX.ZINI, MethodObj)
-    External(\_SB.PCI0.PEGP.DGFX._OFF, MethodObj)
 
     Scope(\_SB.PCI0.GFX0)
     {
@@ -24,9 +22,16 @@ DefinitionBlock ("", "SSDT", 2, "HPHACK", "GpuOf2", 0x00001000)
         // Original _INI is renamed to ZINI
         Method (_INI, 0, NotSerialized)
         {
+            External(\_SB.PCI0.PEGP.DGFX.ZINI, MethodObj)
+            External(\_SB.PCI0.PEGP.DGFX._OFF, MethodObj)
+
             // Turn Radeon 7650M off
-            ZINI()
-            _OFF()
+            if (LAnd(CondRefOf(\_SB.PCI0.PEGP.DGFX.ZINI),
+                CondRefOf(\_SB.PCI0.PEGP.DGFX._OFF)))
+            {
+                ZINI()
+                _OFF()
+            }
         }
     }
 }
