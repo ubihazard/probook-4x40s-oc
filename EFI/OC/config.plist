@@ -58,7 +58,7 @@
 				<key>Comment</key>
 				<string>Disable Radeon 7650M dGPU #1 (needs rename patch)</string>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Path</key>
 				<string>SSDT-dGPU-OFF.aml</string>
 			</dict>
@@ -66,7 +66,7 @@
 				<key>Comment</key>
 				<string>Disable Radeon 7650M dGPU #2 (needs rename patch)</string>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Path</key>
 				<string>SSDT-dGPU-OFF2.aml</string>
 			</dict>
@@ -986,7 +986,7 @@
 				<key>Count</key>
 				<integer>0</integer>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>SAVQWDAy</data>
 				<key>Limit</key>
@@ -1016,7 +1016,7 @@
 				<key>Count</key>
 				<integer>0</integer>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>FCBfSU5J</data>
 				<key>Limit</key>
@@ -1046,7 +1046,7 @@
 				<key>Count</key>
 				<integer>0</integer>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>X1JFRwKgKJNoCgM=</data>
 				<key>Limit</key>
@@ -1076,7 +1076,7 @@
 				<key>Count</key>
 				<integer>0</integer>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>X1BUUwE=</data>
 				<key>Limit</key>
@@ -1106,7 +1106,7 @@
 				<key>Count</key>
 				<integer>0</integer>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Find</key>
 				<data>X1dBSwE=</data>
 				<key>Limit</key>
